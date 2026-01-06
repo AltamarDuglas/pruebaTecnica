@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 
 import { Loader2 } from 'lucide-react';
 
@@ -35,20 +36,43 @@ export const Boton: React.FC<PropsBoton> = ({
 
     const baseClasses = "inline-flex items-center justify-center gap-2 px-5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 rounded-md";
 
+    const iconVariants = {
+        rest: { scale: 1, rotate: 0 },
+        hover: {
+            scale: 1.15,
+            rotate: -12,
+            transition: {
+                type: "spring" as const,
+                stiffness: 400,
+                damping: 10
+            }
+        }
+    };
+
     return (
-        <button
+        <motion.button
             className={`group ${baseClasses} ${variantClasses[variante]} ${className}`}
             disabled={disabled || cargando}
-            {...props}
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 0.98 }}
+            {...props as any} // Cast necesario por conflicto de tipos entre HTMLButton y motion
         >
             {/* Si está cargando mostramos el spinner girando */}
             {cargando ? (
                 <Loader2 className="animate-spin" size={18} />
             ) : (
-                icono && <span className="flex items-center justify-center transition-transform duration-300 group-hover:scale-110">{icono}</span>
+                icono && (
+                    <motion.span
+                        className="flex items-center justify-center"
+                        variants={iconVariants}
+                    >
+                        {icono}
+                    </motion.span>
+                )
             )}
 
             {children}
-        </button>
+        </motion.button>
     );
 };

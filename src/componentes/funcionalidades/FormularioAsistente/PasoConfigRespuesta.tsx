@@ -150,7 +150,7 @@ const GrupoSlider = ({ label, valor, onChange, colores, icono }: { label: string
                 value={valor}
                 onChange={(e) => onChange(parseInt(e.target.value))}
                 style={backgroundStyle}
-                className="w-full h-3 rounded-lg appearance-none cursor-pointer outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-all [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:scale-110"
+                className="w-full h-3 rounded-lg appearance-none cursor-pointer outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-all [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:shadow-md hover:[&::-webkit-slider-thumb]:scale-110"
             />
         </div>
     );

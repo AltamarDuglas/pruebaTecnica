@@ -1,6 +1,6 @@
 # Prueba Técnica - Gestión de Asistentes
 
-Hola, soy Duglas. Esta es mi entrega para la prueba técnica.
+Esta es mi entrega para la prueba técnica.
 Mi objetivo principal no fue solo "hacer que funcione", sino crear una aplicación robusta, mantenible y con una arquitectura frontend sólida que escale bien. También puse especial atención a la experiencia de usuario.
 
 ---
@@ -52,15 +52,15 @@ Dejé algunas cosas listas para que trabajar aquí sea cómodo:
 
 ## Decisiones que tomé
 
-Quise aplicar buenas prácticas desde el inicio:
+Quise aplicar buenas prácticas de ingeniería de software desde el primer commit:
 
-1.  **Arquitectura Limpia**: Separé `dominio` de `componentes`. Si mañana cambiamos React por otra librería, la lógica de negocio se mantiene intacta.
-2.  **Patrón Repositorio**: Ahora guardo los datos en `LocalStorage` por simplicidad, pero encapsulé esa lógica en `RepositorioAsistente`. La ventaja es que si queremos conectar una API real, solo cambio ese archivo y el resto de la app sigue funcionando igual.
-3.  **Componentes Sólidos**: Creé mis propios componentes base (`ui/`) encima de Tailwind. Esto evita repetir clases por todos lados y mantiene la UI consistente.
-4.  **UI/UX**:
-    - **Validaciones en tiempo real** en el formulario.
-    - **Sliders fluidos**: Les implementé un debounce para que no se sientan pesados al arrastrar.
-    - **Tema Oscuro/Claro**: Implementado de forma nativa.
+1.  **Arquitectura Desacoplada**: Separé el `dominio` (reglas de negocio y tipos) de la capa visual. Esto significa que la lógica "core" de la aplicación no depende de React, facilitando pruebas y mantenimiento futuro.
+2.  **Patrón Repositorio**: El acceso a datos está abstraído. Aunque hoy guardamos en `LocalStorage` por simplicidad, encapsular esto en un `Repositorio` permite migrar mañana a una API REST o GraphQL cambiando **un solo archivo**, sin romper ningún componente.
+3.  **Sistema de Diseño Atómico**: En lugar de depender de librerías UI pesadas, construí un set de componentes primitivos ligeros (`ui/`) usando Tailwind CSS. Esto me dio control total para implementar la estética **"Glassmorphism"** y las animaciones sin luchar contra estilos predefinidos.
+4.  **Experiencia de Usuario (UX)**:
+    - **Reactividad**: Validaciones en tiempo real y feedback visual instantáneo (iconos animados).
+    - **Performance**: Implementé `debounce` en los sliders para evitar re-renderizados excesivos y asegurar 60fps incluso en dispositivos lentos.
+    - **Accesibilidad**: Cuidado especial en el contraste del modo oscuro (evitando negros puros) y estados de foco visibles.
 
 ## Lo que implementé
 
@@ -71,6 +71,6 @@ Quise aplicar buenas prácticas desde el inicio:
 
 ## Tiempo invertido
 
-Le dediqué unas **4.5 horas**, priorizando una buena arquitectura y acabado visual sobre aspectos como tests automatizados, debido al límite de tiempo.
+Le dediqué unas **5.5 horas**, priorizando una buena arquitectura y acabado visual sobre aspectos como tests automatizados, debido al límite de tiempo.
 
-Espero que el código sea de tu agrado y se entienda fácil. ¡Cualquier feedback me sirve!
+Espero que el código sea de tu agrado y se entienda fácil. Cualquier feedback me sirve
