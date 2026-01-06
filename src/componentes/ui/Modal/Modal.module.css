@@ -62,9 +62,18 @@
 }
 
 .contenido {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     overflow-y: auto;
-    /* Si el contenido es muy largo, hacemos scroll interno */
+    /* Ocultar barra de scroll visualmente pero mantener funcionalidad */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.contenido::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 @keyframes fadeIn {

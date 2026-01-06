@@ -1,107 +1,58 @@
-# 🤖 Gestión de Asistentes de IA - Prueba Técnica
+# Prueba Técnica - Gestión de Asistentes IA
 
-Aplicación web moderna para la gestión, configuración y simulación de Asistentes de Inteligencia Artificial. Este proyecto ha sido desarrollado siguiendo una filosofía de **"Código Nativo en Español"**, demostrando no solo habilidades técnicas sino también la capacidad de adaptar el código a un lenguaje de dominio específico.
+Este proyecto implementa una solución para la gestión y configuración de asistentes de inteligencia artificial, desarrollado íntegramente en español.
 
-## 🚀 Instrucciones para Correr el Proyecto
+## Instrucciones de Ejecución
 
-El proyecto utiliza **Next.js** y **NPM**. Asegúrate de tener Node.js instalado.
-
-1.  **Clonar el repositorio** (si aún no lo tienes):
-    ```bash
-    git clone https://github.com/AltamarDuglas/pruebaTecnica.git
-    cd prueba-tecnica
-    ```
-
-2.  **Instalar dependencias**:
+1.  **Instalación**:
     ```bash
     npm install
     ```
 
-3.  **Ejecutar el servidor de desarrollo**:
+2.  **Desarrollo**:
     ```bash
     npm run dev
     ```
+    Accesible en [http://localhost:3000](http://localhost:3000).
 
-4.  **Abrir en el navegador**:
-    Ingresa a [http://localhost:3000](http://localhost:3000) para ver la aplicación.
+## Decisiones Técnicas y Arquitectura
 
----
+El desarrollo se guió por principios **SOLID** y **Clean Architecture** para garantizar mantenibilidad y escalabilidad.
 
-## 🛠️ Decisiones Técnicas
+### 1. Arquitectura Hexagonal Simplificada (Capas)
+Se separó la lógica de negocio de la infraestructura y la UI:
+-   **Dominio (`src/dominio`)**: Define las interfaces (`Asistente`, `RepositorioAsistente`) y tipos puros. No tiene dependencias de framework.
+-   **Infraestructura/Servicios (`src/servicios`)**: Implementación concreta de los repositorios.
+    -   *Decisión*: Se usó el **Patrón Repositorio** (`RepositorioAsistente`) para desacoplar la lógica de guardado. Actualmente implementa persistencia en `LocalStorage`, pero gracias a la Inversión de Dependencias (D of SOLID), cambiar a una API REST solo requeriría crear una nueva clase `ApiRepositorio` sin modificar la UI o lógica de negocio.
+-   **UI (`src/componentes`)**: Componentes de React divididos en `ui` (genéricos, "dumb components") y `funcionalidades` (con lógica de negocio).
 
-### 1. Arquitectura en Capas y DDD (Simplificado)
-Se estructuró el proyecto separando claramente las responsabilidades, lo que facilita la escalabilidad y el mantenimiento:
--   **`src/dominio`**: Define las Entidades (`Asistente`) y DTOs, actuando como el núcleo de la lógica de negocio.
--   **`src/servicios`**: Implementa el patrón **Repository**. Se creó una interfaz `RepositorioAsistente` para desacoplar la lógica de persistencia. Actualmente se usa una implementación base `LocalStorage` (`LocalStorageRepositorio.ts`), pero podría cambiarse por una API real sin tocar la UI.
--   **`src/hooks`**: Custom hooks (e.g., `useAsistentes`) que actúan como adaptadores entre la vista y la capa de servicios, manejando estados de carga y errores.
--   **`src/componentes`**: Separados en `ui` (componentes base reutilizables sgnostic) y `funcionalidades` (componentes de negocio específicos).
+### 2. Principios SOLID Aplicados
+-   **Single Responsibility (SRP)**: Cada componente de UI tiene una única responsabilidad (ej. `Modal` solo maneja su estado de apertura, `FormularioEntrenamiento` solo la lógica de ese form). Los hooks encapsulan la lógica de estado.
+-   **Open/Closed (OCP)**: Los componentes base como `Boton` o `Tarjeta` están abiertos a extensión mediante props, pero cerrados a modificación interna para nuevos casos de uso.
+-   **Liskov Substitution (LSP)**: Las implementaciones del repositorio pueden ser intercambiables sin romper la aplicación.
+-   **Interface Segregation (ISP)**: Interfaces de dominio específicas y pequeñas.
+-   **Dependency Inversion (DIP)**: Los hooks dependen de la abstracción `RepositorioAsistente` (vía singleton/inyección manual), no de la implementación concreta de `localStorage` directamente.
 
-### 2. Código Nativo en Español
-Para cumplir con el objetivo de refactorización y demostrar adaptabilidad, **todo el código está en español**:
--   Variables, Funciones, Clases e Interfaces.
--   CSS Modules y Clases.
--   Comentarios y Documentación.
-Esto facilita la lectura para equipos hispanohablantes y demuestra un dominio total sobre la semántica del código.
+### 3. CSS Modules
+Se optó por CSS Modules para evitar colisiones de nombres y mantener los estilos encapsulados junto a sus componentes, facilitando la eliminación de código muerto.
 
-### 3. Sistema de Diseño (UI/UX)
--   **CSS Modules**: Se optó por CSS nativo modular para tener control total sobre los estilos, animaciones y especificidad, sin depender de librerías pesadas como Tailwind (aunque se podría integrar).
--   **Variables CSS**: Se definieron tokens de diseño globales (`globals.css`) para colores, espaciados y radios, facilitando la implementación del **Modo Oscuro**.
--   **Componentes Reutilizables**: Se crearon componentes base robustos (`Boton`, `CampoTexto`, `Modal`, `Selector`) que encapsulan estilos y comportamientos (accesibilidad, animaciones), asegurando consistencia visual.
+## Características Implementadas
 
----
+1.  **CRUD de Asistentes**: Listado, creación, edición y eliminación.
+2.  **Formulario Avanzado**: Wizard de creación con validaciones y lógica de negocio compleja (slider de distribución porcentual balanceada automáticamente).
+3.  **Simulador de Entrenamiento**: Interfaz de chat simulada para verificar el comportamiento del asistente.
+4.  **UI/UX**: Modo oscuro/claro persistente, diseño responsive y estados de carga.
 
-## ✨ Características Implementadas
+## Trade-offs y Priorización
 
-1.  **Gestión (CRUD) de Asistentes**:
-    -   Crear nuevos asistentes con un **formulario multi-paso** (Info Básica -> Configuración -> Revisión).
-    -   Validación de formularios en tiempo real.
-    -   Listado de asistentes con tarjetas interactivas.
-    -   Eliminación con confirmación.
-    -   Edición de asistentes existentes.
+Debido al límite de tiempo, se priorizó la **calidad del código frontend y la arquitectura** sobre la infraestructura de backend:
 
-2.  **Configuración Avanzada**:
-    -   **Slider Balanceado Inteligentemente**: Al configurar la longitud de respuesta, los sliders se auto-ajustan para asegurar que siempre sumen 100%.
-    -   Selector de tono y lenguaje.
+-   **Persistencia**: Se dejó fuera una base de datos real (PostgreSQL/MongoDB) en favor de `localStorage`. Esto permitió enfocar el esfuerzo en pulir la UI y la estructura de componentes React.
+-   **Testing**: No se incluyen tests unitarios (Jest/Cypress). Se priorizó la funcionalidad completa y la experiencia de usuario (UX). La arquitectura actual facilita la adición de tests posteriormente.
 
-3.  **Área de Entrenamiento y Simulación**:
-    -   Página dinámica por asistente (`/[id]`).
-    -   **Editor de System Prompt**: Campo de texto para definir las instrucciones de comportamiento.
-    -   **Simulador de Chat**: Interfaz de chat funcional donde el asistente responde (simulado) con delay de red artificial para mayor realismo.
+## Tiempo de Dedicación
 
-4.  **Extras UI**:
-    -   **Tema Oscuro/Claro**: Toggle funcional persistente.
-    -   **Animaciones**: Transiciones suaves al abrir modales, cargar listas y enviar mensajes.
-    -   **Responsive**: Diseño 100% adaptable a móviles y escritorio.
-
----
-
-## ⚖️ Priorización y Trade-offs (Qué dejé fuera)
-
-Dado el tiempo limitado, se tomaron las siguientes decisiones:
-
-1.  **Backend Real / Base de Datos**:
-    -   *Decisión*: Usar `localStorage`.
-    -   *Por qué*: Para priorizar la calidad de la UI/UX y la estructura del frontend sin complicaciones de despliegue de infraestructura. El patrón Repositorio hace que migrar a una API real sea trivial.
-
-2.  **Librerías de Componentes (MUI / Shadcn)**:
-    -   *Decisión*: Construir componentes propios (`src/componentes/ui`).
-    -   *Por qué*: Para demostrar la capacidad de construir interfaces desde cero, manejar CSS avanzado y entender el ciclo de vida de los componentes React sin "muletas".
-
-3.  **Tests Automatizados (Jest/Cypress)**:
-    -   *Decisión*: No incluidos en esta iteración.
-    -   *Por qué*: Se priorizó la funcionalidad visible y la experiencia de usuario. Sin embargo, la arquitectura (Servicios desacoplados) está lista para ser testeada unitariamente con facilidad.
-
----
-
-## ⏱️ Tiempo de Dedicación
-
-**Aproximadamente 4 - 5 horas.**
--   **1h**: Configuración inicial, Git flow y definición de arquitectura.
--   **2h**: Implementación de capa base (UI Kit, Servicios) y Refactorización a Español.
--   **1.5h**: Desarrollo de funcionalidades complejas (Formulario Multi-paso y Simulador de Chat).
--   **0.5h**: Pulido visual, animaciones y documentación.
-
----
-
-### Autor
-Desarrollado como parte de la prueba técnica para demostrar dominio en **Next.js, TypeScript, React, Git y Arquitectura de Software**.
+**Total estimado: 4.5 horas.**
+-   Configuración y estructura base: 1h
+-   Desarrollo de componentes UI y lógica global: 2h
+-   Implementación de funcionalidades complejas (Formulario/Chat): 1.5h

@@ -3,7 +3,7 @@
 .contenedor {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-md);
     animation: aparecer 0.3s ease-out;
 }
 
@@ -31,7 +31,7 @@
 .filaSliders {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
 }
 
 .grupoSlider {
