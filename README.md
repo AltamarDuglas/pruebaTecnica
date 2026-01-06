@@ -40,7 +40,7 @@ src/
 └── hooks/                # Lógica de estado (useAsistentes)
 ```
 
-## Configuración para Desarrolladores
+## Configuración
 
 Dejé algunas cosas listas para que trabajar aquí sea cómodo:
 
