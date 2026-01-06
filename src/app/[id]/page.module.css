@@ -1,0 +1,103 @@
+/* page.module.css (Entrenamiento) */
+
+.contenedorPagina {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: var(--spacing-xl);
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--spacing-md);
+}
+
+.botonVolver {
+    color: var(--text-secondary);
+}
+
+.textoVolver {
+    font-weight: 500;
+}
+
+.infoCabecera {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.nombreAsistente {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.insignias {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.insignia {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.contenidoGrilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    /* Altura ajustada: header (aprox 120px) - padding - margins */
+    height: calc(100vh - 200px);
+    min-height: 500px;
+}
+
+@media (max-width: 1024px) {
+    .contenidoGrilla {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+}
+
+.columna {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.contenedorCentro {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--spacing-md);
+}
+
+.tituloError {
+    color: var(--error);
+    font-size: 1.5rem;
+}
+
+.spinner {
+    animation: girar 1s linear infinite;
+    color: var(--primary);
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
