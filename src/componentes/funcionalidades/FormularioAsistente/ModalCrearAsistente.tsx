@@ -20,8 +20,8 @@ const DATOS_INICIALES: CrearAsistenteDTO = {
     nombre: '',
     idioma: 'Español',
     tono: 'Profesional',
-    configuracionLongitudRespuesta: { corta: 30, media: 40, larga: 30 },
-    habilitarAudio: false
+    longitudRespuesta: { corta: 30, media: 40, larga: 30 },
+    audioHabilitado: false
 };
 
 export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
@@ -69,9 +69,9 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
 
     const validarPaso2 = (): boolean => {
         const nuevosErrores: Record<string, string> = {};
-        const { corta, media, larga } = datosFormulario.configuracionLongitudRespuesta || { corta: 0, media: 0, larga: 0 };
+        const { corta, media, larga } = datosFormulario.longitudRespuesta || { corta: 0, media: 0, larga: 0 };
         if ((corta + media + larga) !== 100) {
-            nuevosErrores.configuracionLongitudRespuesta = 'La suma de porcentajes debe ser 100%.';
+            nuevosErrores.longitudRespuesta = 'La suma de porcentajes debe ser 100%.';
         }
         setErrores(nuevosErrores);
         return Object.keys(nuevosErrores).length === 0;
@@ -79,7 +79,7 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
 
     const siguientePaso = () => {
         if (paso === 1 && validarPaso1()) setPaso(2);
-        else if (paso === 2 && validarPaso2()) setPaso(3);
+        // Step 2 is the final step now
     };
 
     const pasoAnterior = () => {
@@ -121,9 +121,8 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
             case 1:
                 return <PasoInfoBasica datos={datosFormulario} alActualizar={manejarActualizacion} errores={errores} />;
             case 2:
+                // We do validation on submit now or keep "Siguiente" as "Guardar"
                 return <PasoConfigRespuesta datos={datosFormulario} alActualizar={manejarActualizacion} errores={errores} />;
-            case 3:
-                return <PasoRevision datos={datosFormulario} />;
             default:
                 return null;
         }
@@ -135,22 +134,20 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
             alCerrar={alCerrar}
             titulo={datosIniciales ? 'Editar Asistente' : 'Crear Nuevo Asistente'}
         >
+            {/* Stepper moved to top */}
+            <div className={estilos.indicadorPasosSuperior}>
+                <div className={`${estilos.pasoCirculo} ${paso >= 1 ? estilos.activo : ''}`}>1</div>
+                <div className={estilos.lineaConectora}></div>
+                <div className={`${estilos.pasoCirculo} ${paso >= 2 ? estilos.activo : ''}`}>2</div>
+            </div>
+
             <div className={estilos.contenedorPasos}>
                 {renderizarContenido()}
             </div>
 
             {!mostrarExito && (
                 <div className={estilos.pieModal}>
-                    <div className={estilos.indicadorPasos}>
-                        {[1, 2, 3].map(p => (
-                            <div
-                                key={p}
-                                className={`${estilos.puntoPaso} ${paso >= p ? estilos.puntoActivo : ''}`}
-                            />
-                        ))}
-                    </div>
-
-                    <div className={estilos.botonesNavegacion}>
+                    <div className={estilos.botonesNavegacion} style={{ marginLeft: 'auto' }}>
                         {paso > 1 && (
                             <Boton
                                 variante="secundario"
@@ -161,7 +158,7 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
                             </Boton>
                         )}
 
-                        {paso < 3 ? (
+                        {paso < 2 ? (
                             <Boton
                                 onClick={siguientePaso}
                                 icono={<ArrowRight size={16} />}
@@ -171,7 +168,9 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
                             </Boton>
                         ) : (
                             <Boton
-                                onClick={guardarAsistente}
+                                onClick={() => {
+                                    if (validarPaso2()) guardarAsistente();
+                                }}
                                 cargando={cargando}
                                 icono={<Save size={16} />}
                                 variante="primario"

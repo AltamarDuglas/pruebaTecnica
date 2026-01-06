@@ -16,15 +16,15 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
 }) => {
     // Estado local para los sliders para mejor performance visual
     const [longitudes, setLongitudes] = useState({
-        corta: datos.configuracionLongitudRespuesta?.corta || 30,
-        media: datos.configuracionLongitudRespuesta?.media || 40,
-        larga: datos.configuracionLongitudRespuesta?.larga || 30
+        corta: datos.longitudRespuesta?.corta || 30,
+        media: datos.longitudRespuesta?.media || 40,
+        larga: datos.longitudRespuesta?.larga || 30
     });
 
     // Actualizar padre cuando cambia estado local (con debounce manual o directo)
     useEffect(() => {
         alActualizar({
-            configuracionLongitudRespuesta: longitudes
+            longitudRespuesta: longitudes
         });
     }, [longitudes]);
 
@@ -98,8 +98,8 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
                 />
             </div>
 
-            {errores.configuracionLongitudRespuesta && (
-                <p style={{ color: 'var(--error)', fontSize: '0.8rem' }}>{errores.configuracionLongitudRespuesta}</p>
+            {errores.longitudRespuesta && (
+                <p style={{ color: 'var(--error)', fontSize: '0.8rem' }}>{errores.longitudRespuesta}</p>
             )}
 
             <div className={estilos.filaSwitch}>
@@ -110,8 +110,8 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
                 <label className={estilos.switch}>
                     <input
                         type="checkbox"
-                        checked={datos.habilitarAudio || false}
-                        onChange={(e) => alActualizar({ habilitarAudio: e.target.checked })}
+                        checked={datos.audioHabilitado || false}
+                        onChange={(e) => alActualizar({ audioHabilitado: e.target.checked })}
                     />
                     <span className={estilos.slider}></span>
                 </label>

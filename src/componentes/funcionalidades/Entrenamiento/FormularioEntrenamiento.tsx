@@ -52,10 +52,7 @@ export const FormularioEntrenamiento: React.FC<PropsFormularioEntrenamiento> = (
 
     return (
         <div className={estilos.contenedor}>
-            <h3 className={estilos.titulo}>Entrenamiento del Asistente</h3>
-            <p className={estilos.descripcion}>
-                Define las reglas de comportamiento y el conocimiento base para {asistente.nombre}.
-            </p>
+            {/* Title and Description handled by parent page */}
 
             <textarea
                 className={estilos.areaTexto}

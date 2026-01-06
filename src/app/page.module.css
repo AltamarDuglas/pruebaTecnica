@@ -3,16 +3,20 @@
 .contenedor {
   max-width: 1000px;
   margin: 0 auto;
+  padding: var(--spacing-lg);
 }
 
+/* .ruta removed */
+
 .tarjetaPrincipal {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   min-height: 600px;
-  box-shadow: var(--shadow-sm);
   position: relative;
+  /* Removal of shadow for sketch look */
+  box-shadow: none;
 }
 
 .filaCabecera {
@@ -21,7 +25,6 @@
   align-items: center;
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid transparent;
 }
 
 .titulo {
@@ -30,6 +33,8 @@
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+  /* Sketchy feel */
 }
 
 @media (max-width: 640px) {

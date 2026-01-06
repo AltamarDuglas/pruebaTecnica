@@ -81,16 +81,7 @@ export const SimuladorChat: React.FC = () => {
 
     return (
         <div className={estilos.contenedor}>
-            <div className={estilos.cabecera}>
-                <h3 className={estilos.titulo}>Chat Simulado</h3>
-                <button
-                    onClick={manejarReinicio}
-                    className={estilos.botonReiniciar}
-                    title="Reiniciar conversación"
-                >
-                    <RefreshCw size={16} />
-                </button>
-            </div>
+            {/* Header handled by parent page */}
 
             <div className={estilos.areaMensajes}>
                 {mensajes.length === 0 && (

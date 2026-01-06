@@ -15,21 +15,44 @@
     border-top: 1px solid var(--border);
 }
 
-.indicadorPasos {
+.indicadorPasosSuperior {
     display: flex;
-    gap: var(--spacing-xs);
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-xl);
 }
 
-.puntoPaso {
-    width: 8px;
-    height: 8px;
+/* New Stepper Styles */
+.pasoCirculo {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background-color: var(--border);
-    transition: background-color 0.3s;
+    border: 2px solid var(--text-secondary);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    background-color: transparent;
+    transition: all 0.3s ease;
 }
 
-.puntoActivo {
-    background-color: var(--primary);
+.pasoCirculo.activo {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--surface-hover);
+    /* Subtle background for active */
+}
+
+.lineaConectora {
+    flex: 1;
+    /* Grow to fill space between circles */
+    height: 2px;
+    background-color: var(--border);
+    max-width: 100px;
+    /* Limit width like in sketch */
 }
 
 .botonesNavegacion {

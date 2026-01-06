@@ -43,12 +43,14 @@ export default function Inicio() {
 
   return (
     <div className={estilos.contenedor}>
+      {/* Breadcrumb removed */}
+
       <div className={estilos.tarjetaPrincipal}>
         <div className={estilos.filaCabecera}>
-          <h2 className={estilos.titulo}>Asistentes IA</h2>
+          <h2 className={estilos.titulo}>ASISTENTES IA</h2>
 
           <Boton onClick={manejarCrear} icono={<Plus size={18} />}>
-            Creación
+            CREACIÓN
           </Boton>
         </div>
 

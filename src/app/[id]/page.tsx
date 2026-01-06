@@ -77,35 +77,44 @@ export default function PaginaEntrenamiento() {
 
     return (
         <div className={estilos.contenedorPagina}>
-            <header className={estilos.cabecera}>
-                <Boton
-                    variante="fantasma"
-                    onClick={() => router.push('/')}
-                    className={estilos.botonVolver}
-                >
-                    <ArrowLeft size={20} />
-                    <span className={estilos.textoVolver}>Volver</span>
-                </Boton>
+            {/* Breadcrumb removed */}
 
-                <div className={estilos.infoCabecera}>
-                    <h1 className={estilos.nombreAsistente}>{asistente.nombre}</h1>
-                    <div className={estilos.insignias}>
-                        <span className={estilos.insignia}>{asistente.idioma}</span>
-                        <span className={estilos.insignia}>{asistente.tono}</span>
+            <div className={estilos.tarjetaPrincipal}>
+                {/* Top Section: Datos del Asistente */}
+                <div className={estilos.seccionDatos}>
+                    <h3 className={estilos.tituloSeccion}>DATOS DEL ASISTENTE</h3>
+                    <div className={estilos.infoDatos}>
+                        <div className={estilos.datoItem}>
+                            <span className={estilos.labelDato}>Nombre:</span>
+                            <span className={estilos.valorDato}>{asistente.nombre}</span>
+                        </div>
+                        <div className={estilos.datoItem}>
+                            <span className={estilos.labelDato}>Idioma:</span>
+                            <span className={estilos.valorDato}>{asistente.idioma}</span>
+                        </div>
+                        <div className={estilos.datoItem}>
+                            <span className={estilos.labelDato}>Tono:</span>
+                            <span className={estilos.valorDato}>{asistente.tono}</span>
+                        </div>
                     </div>
                 </div>
-            </header>
 
-            <div className={estilos.contenidoGrilla}>
-                <div className={estilos.columna}>
-                    <FormularioEntrenamiento
-                        asistente={asistente}
-                        alGuardar={manejarGuardarEntrenamiento}
-                    />
-                </div>
+                {/* Split Content: Form & Chat */}
+                <div className={estilos.contenidoSplit}>
+                    <div className={estilos.panelIzquierdo}>
+                        <h3 className={estilos.tituloPanel}>Entrenamiento del asistente:</h3>
+                        <p className={estilos.descPanel}>Sólo persistencia de datos en local. Que al refrescar la data permanezca una vez se le da guardar</p>
+                        <FormularioEntrenamiento
+                            asistente={asistente}
+                            alGuardar={manejarGuardarEntrenamiento}
+                        />
+                    </div>
 
-                <div className={estilos.columna}>
-                    <SimuladorChat />
+                    <div className={estilos.panelDerecho}>
+                        <h3 className={estilos.tituloPanel}>CHAT SIMULADO:</h3>
+                        <p className={estilos.descPanel}>Las respuestas son completamente simuladas, se pueden obtener de un JSON, deben tener delay para simular el fetch de la data...</p>
+                        <SimuladorChat />
+                    </div>
                 </div>
             </div>
         </div>

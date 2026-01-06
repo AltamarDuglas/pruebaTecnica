@@ -47,7 +47,7 @@ export const GrillaAsistentes: React.FC<PropsGrillaAsistentes> = ({
     }
 
     return (
-        <div className={estilos.cuadricula}>
+        <div className={estilos.lista}>
             {asistentes.map((asistente) => (
                 <TarjetaAsistente
                     key={asistente.id}
