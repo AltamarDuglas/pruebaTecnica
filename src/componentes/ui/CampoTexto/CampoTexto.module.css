@@ -1,0 +1,46 @@
+/* CampoTexto.module.css */
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.etiqueta {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    background-color: var(--surface);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    color: var(--text-primary);
+}
+
+/* Efecto focus */
+.input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Estado de error */
+.errorInput {
+    border-color: var(--error);
+}
+
+.mensajeError {
+    font-size: 0.8rem;
+    color: var(--error);
+}
