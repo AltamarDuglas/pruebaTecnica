@@ -47,8 +47,10 @@ Se optó por CSS Modules para evitar colisiones de nombres y mantener los estilo
 
 Debido al límite de tiempo, se priorizó la **calidad del código frontend y la arquitectura** sobre la infraestructura de backend:
 
--   **Persistencia**: Se dejó fuera una base de datos real (PostgreSQL/MongoDB) en favor de `localStorage`. Esto permitió enfocar el esfuerzo en pulir la UI y la estructura de componentes React.
--   **Testing**: No se incluyen tests unitarios (Jest/Cypress). Se priorizó la funcionalidad completa y la experiencia de usuario (UX). La arquitectura actual facilita la adición de tests posteriormente.
+-   **Testing y Calidad**: Aunque la suite de tests (Jest/Cypress) no se implementó por limitaciones de tiempo, la arquitectura **Hexagonal/Clean** aplicada garantiza una alta **testabilidad**:
+    -   *Lógica de Negocio*: Las entidades y DTOs en `src/dominio` son funciones puras o tipos, triviales de testear.
+    -   *Servicios*: Al depender de abstracciones (`RepositorioAsistente`), se pueden mockear fácilmente para tests de integración.
+    -   *Hooks*: Los Custom Hooks encapsulan la lógica de estado y efectos, permitiendo un testing aislado con `renderHook`.
 
 ## Tiempo de Dedicación
 
