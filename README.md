@@ -39,7 +39,7 @@ src/
 └── utilidades/           # Helpers y formatters
 ```
 
-## Configuración para Desarrolladores
+## Configuración
 
 ### 1. Alias de Rutas (`tsconfig.json`)
 Para mantener los imports limpios, hemos configurado el alias `@`:
