@@ -94,7 +94,7 @@
 .burbujaBot {
     align-self: flex-start;
     background-color: var(--secondary);
-    color: white;
+    color: var(--text-primary);
     border-bottom-left-radius: 2px;
 }
 
