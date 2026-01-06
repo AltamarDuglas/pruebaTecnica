@@ -1,60 +1,45 @@
-# Prueba Técnica - Gestión de Asistentes IA
+# Gestión de Asistentes IA 🤖 ✨
 
-Este proyecto implementa una solución para la gestión y configuración de asistentes de inteligencia artificial, desarrollado íntegramente en español.
+¡Hola! 👋 Esta es mi solución para la prueba técnica. Básicamente es una app para gestionar y entrenar asistentes virtuales, todo hecho con React, Next.js y mucho cariño.
 
-## Instrucciones de Ejecución
+## ¿Cómo lo hago correr? 🚀
 
-1.  **Instalación**:
+Súper fácil, nada raro:
+
+1.  **Instala las dependencias**:
     ```bash
     npm install
     ```
+    *(O `pnpm`, `yarn`, lo que uses, pero con npm va fijo).*
 
-2.  **Desarrollo**:
+2.  **Arranca el servidor**:
     ```bash
     npm run dev
     ```
-    Accesible en [http://localhost:3000](http://localhost:3000).
+    Y listo, abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## Decisiones Técnicas y Arquitectura
+## ¿Qué tiene de interesante? 🧐
 
-El desarrollo se guió por principios **SOLID** y **Clean Architecture** para garantizar mantenibilidad y escalabilidad.
+Le metí bastante onda a la UI y la arquitectura para que quede prolijo y escalable:
 
-### 1. Arquitectura Hexagonal Simplificada (Capas)
-Se separó la lógica de negocio de la infraestructura y la UI:
--   **Dominio (`src/dominio`)**: Define las interfaces (`Asistente`, `RepositorioAsistente`) y tipos puros. No tiene dependencias de framework.
--   **Infraestructura/Servicios (`src/servicios`)**: Implementación concreta de los repositorios.
-    -   *Decisión*: Se usó el **Patrón Repositorio** (`RepositorioAsistente`) para desacoplar la lógica de guardado. Actualmente implementa persistencia en `LocalStorage`, pero gracias a la Inversión de Dependencias (D of SOLID), cambiar a una API REST solo requeriría crear una nueva clase `ApiRepositorio` sin modificar la UI o lógica de negocio.
--   **UI (`src/componentes`)**: Componentes de React divididos en `ui` (genéricos, "dumb components") y `funcionalidades` (con lógica de negocio).
+*   **Arquitectura Limpia (Clean Architecture)**:
+    *   Separé todo en capas (`dominio`, `servicios`, `componentes`) para no mezclar peras con manzanas.
+    *   La lógica de negocio no sabe nada de React ni de dónde se guardan los datos.
+*   **Persistencia**:
+    *   Ahora mismo usa `localStorage` para no complicarla con backend, pero está hecho con el **Patrón Repositorio**. Si mañana queremos enchufarle una API real, cambiamos una sola clase y el resto ni se entera. Magia. 🪄
+*   **UI/UX**:
+    *   **Tema Oscuro/Claro**: Detecta tu preferencia y te la guarda.
+    *   **Diseño Responsivo**: Se ve bien en el celu y en la compu.
+    *   **Modales y Steppers**: El formulario de creación no es un choclo gigante, está dividido en pasitos prolijos.
+    *   **Simulador de Chat**: Puedes "entrenar" al asistente y chatear con él (simulado, obvio).
 
-### 2. Principios SOLID Aplicados
--   **Single Responsibility (SRP)**: Cada componente de UI tiene una única responsabilidad (ej. `Modal` solo maneja su estado de apertura, `FormularioEntrenamiento` solo la lógica de ese form). Los hooks encapsulan la lógica de estado.
--   **Open/Closed (OCP)**: Los componentes base como `Boton` o `Tarjeta` están abiertos a extensión mediante props, pero cerrados a modificación interna para nuevos casos de uso.
--   **Liskov Substitution (LSP)**: Las implementaciones del repositorio pueden ser intercambiables sin romper la aplicación.
--   **Interface Segregation (ISP)**: Interfaces de dominio específicas y pequeñas.
--   **Dependency Inversion (DIP)**: Los hooks dependen de la abstracción `RepositorioAsistente` (vía singleton/inyección manual), no de la implementación concreta de `localStorage` directamente.
+## Tecnologías 🛠️
 
-### 3. CSS Modules
-Se optó por CSS Modules para evitar colisiones de nombres y mantener los estilos encapsulados junto a sus componentes, facilitando la eliminación de código muerto.
+*   **Next.js y React**: La base de todo.
+*   **CSS Modules**: Para que los estilos no se peleen entre sí.
+*   **Context API**: Para manejar el estado global sin volverse loco.
+*   **Lucide React**: Esos íconos facheros que ves por ahí.
 
-## Características Implementadas
+---
 
-1.  **CRUD de Asistentes**: Listado, creación, edición y eliminación.
-2.  **Formulario Avanzado**: Wizard de creación con validaciones y lógica de negocio compleja (slider de distribución porcentual balanceada automáticamente).
-3.  **Simulador de Entrenamiento**: Interfaz de chat simulada para verificar el comportamiento del asistente.
-4.  **UI/UX**: Modo oscuro/claro persistente, diseño responsive y estados de carga.
-
-## Trade-offs y Priorización
-
-Debido al límite de tiempo, se priorizó la **calidad del código frontend y la arquitectura** sobre la infraestructura de backend:
-
--   **Testing y Calidad**: Aunque la suite de tests (Jest/Cypress) no se implementó por limitaciones de tiempo, la arquitectura **Hexagonal/Clean** aplicada garantiza una alta **testabilidad**:
-    -   *Lógica de Negocio*: Las entidades y DTOs en `src/dominio` son funciones puras o tipos, triviales de testear.
-    -   *Servicios*: Al depender de abstracciones (`RepositorioAsistente`), se pueden mockear fácilmente para tests de integración.
-    -   *Hooks*: Los Custom Hooks encapsulan la lógica de estado y efectos, permitiendo un testing aislado con `renderHook`.
-
-## Tiempo de Dedicación
-
-**Total estimado: 4.5 horas.**
--   Configuración y estructura base: 1h
--   Desarrollo de componentes UI y lógica global: 2h
--   Implementación de funcionalidades complejas (Formulario/Chat): 1.5h
+En fin, espero que les guste. Cualquier cosa me chiflan. ¡Saludos! 🧉
