@@ -7,7 +7,7 @@ import { PasoRevision } from './PasoRevision';
 import { CrearAsistenteDTO, Asistente } from '@/dominio/tipos';
 import { useAsistentes } from '@/hooks/useAsistentes';
 import { ArrowLeft, ArrowRight, Save, CheckCircle2 } from 'lucide-react';
-import estilos from './ModalCrearAsistente.module.css';
+
 
 interface PropsModalCrear {
     abierto: boolean;
@@ -36,7 +36,8 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
     const [errores, setErrores] = useState<Record<string, string>>({});
     const [mostrarExito, setMostrarExito] = useState(false);
 
-    // Reiniciar estado
+    // Reiniciar estado cada vez que se abre el modal.
+    // Si hay datos iniciales, es edición. Si no, empezamos de cero.
     useEffect(() => {
         if (abierto) {
             if (datosIniciales) {
@@ -109,10 +110,10 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
     const renderizarContenido = () => {
         if (mostrarExito) {
             return (
-                <div className={estilos.mensajeExito}>
+                <div className="flex flex-col items-center justify-center min-h-[300px] text-center text-green-500 gap-4 animate-in zoom-in duration-300">
                     <CheckCircle2 size={64} />
-                    <h3>¡Asistente Guardado!</h3>
-                    <p>El asistente ha sido {datosIniciales ? 'actualizado' : 'creado'} correctamente.</p>
+                    <h3 className="text-2xl font-bold">¡Asistente Guardado!</h3>
+                    <p className="text-secondary-foreground">El asistente ha sido {datosIniciales ? 'actualizado' : 'creado'} correctamente.</p>
                 </div>
             );
         }
@@ -135,32 +136,54 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
             titulo={datosIniciales ? 'Editar Asistente' : 'Crear Nuevo Asistente'}
         >
             {/* Stepper con labels */}
-            <div className={estilos.indicadorPasosSuperior}>
-                {/* Step 1 */}
-                <div className={`${estilos.pasoItem} ${paso >= 1 ? estilos.activo : ''} ${paso > 1 ? estilos.completado : ''}`}>
-                    <div className={estilos.pasoCirculo}>1</div>
-                    <span className={estilos.pasoEtiqueta}>Información</span>
-                </div>
+            {!mostrarExito && (
+                <div className="flex items-start justify-between mb-6 px-[10%] relative w-full sm:px-0 sm:mb-4">
+                    {/* Line Connector */}
+                    <div className="absolute top-5 left-[15%] right-[15%] h-0.5 bg-border z-0" />
 
-                {/* Step 2 */}
-                <div className={`${estilos.pasoItem} ${paso === 2 ? estilos.activo : ''}`}>
-                    <div className={estilos.pasoCirculo}>2</div>
-                    <span className={estilos.pasoEtiqueta}>Configuración</span>
-                </div>
-            </div>
+                    {/* Step 1 */}
+                    <div className={`flex flex-col items-center gap-1 relative z-10 group`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold transition-all duration-300 ${paso >= 1
+                            ? 'bg-primary border-primary text-primary-foreground shadow-lg scale-110'
+                            : 'bg-surface border-2 border-border text-muted-foreground'
+                            }`}>
+                            1
+                        </div>
+                        <span className={`text-sm font-medium transition-colors duration-300 ${paso >= 1 ? 'text-primary font-semibold' : 'text-muted-foreground'
+                            }`}>
+                            Información
+                        </span>
+                    </div>
 
-            <div className={estilos.contenedorPasos}>
+                    {/* Step 2 */}
+                    <div className={`flex flex-col items-center gap-1 relative z-10 group`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold transition-all duration-300 ${paso === 2
+                            ? 'bg-primary border-primary text-primary-foreground shadow-lg scale-110'
+                            : 'bg-secondary border-2 border-border text-muted-foreground'
+                            }`}>
+                            2
+                        </div>
+                        <span className={`text-sm font-medium transition-colors duration-300 ${paso === 2 ? 'text-primary font-semibold' : 'text-muted-foreground'
+                            }`}>
+                            Configuración
+                        </span>
+                    </div>
+                </div>
+            )}
+
+            <div className="min-h-[250px] flex flex-col">
                 {renderizarContenido()}
             </div>
 
             {!mostrarExito && (
-                <div className={estilos.pieModal}>
-                    <div className={estilos.botonesNavegacion} style={{ marginLeft: 'auto' }}>
+                <div className="flex justify-between items-center mt-4 pt-4 border-t border-border sm:flex-col-reverse sm:gap-4 sm:items-stretch">
+                    <div className="flex gap-2 ml-auto sm:w-full sm:justify-between">
                         {paso > 1 && (
                             <Boton
                                 variante="secundario"
                                 onClick={pasoAnterior}
                                 icono={<ArrowLeft size={16} />}
+                                className="sm:flex-1"
                             >
                                 Atrás
                             </Boton>
@@ -170,7 +193,7 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
                             <Boton
                                 onClick={siguientePaso}
                                 icono={<ArrowRight size={16} />}
-                                style={{ flexDirection: 'row-reverse' }} // Icono a la derecha
+                                className="flex-row-reverse sm:flex-1" // Icono a la derecha
                             >
                                 Siguiente
                             </Boton>
@@ -182,6 +205,7 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
                                 cargando={cargando}
                                 icono={<Save size={16} />}
                                 variante="primario"
+                                className="sm:flex-1"
                             >
                                 {datosIniciales ? 'Actualizar' : 'Crear Asistente'}
                             </Boton>

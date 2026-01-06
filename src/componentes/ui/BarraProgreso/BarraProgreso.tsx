@@ -1,5 +1,5 @@
 import React from 'react';
-import estilos from './BarraProgreso.module.css';
+
 
 interface PropsBarraProgreso {
     progreso: number; // value (0-100) -> progreso
@@ -19,16 +19,16 @@ export const BarraProgreso: React.FC<PropsBarraProgreso> = ({
     const valorSeguro = Math.min(100, Math.max(0, progreso));
 
     return (
-        <div className={estilos.contenedor}>
+        <div className="flex flex-col gap-1 w-full text-sm">
             {(etiqueta || mostrarPorcentaje) && (
-                <div className={estilos.etiqueta}>
+                <div className="flex justify-between items-center mb-1 text-muted-foreground font-medium text-xs">
                     {etiqueta && <span>{etiqueta}</span>}
                     {mostrarPorcentaje && <span>{Math.round(valorSeguro)}%</span>}
                 </div>
             )}
-            <div className={estilos.track}>
+            <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
                 <div
-                    className={estilos.barra}
+                    className="h-full bg-primary transition-all duration-300 ease-in-out"
                     style={{ width: `${valorSeguro}%` }}
                 />
             </div>

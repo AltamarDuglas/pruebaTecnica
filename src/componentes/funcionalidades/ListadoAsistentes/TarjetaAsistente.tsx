@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { Asistente } from '@/dominio/tipos';
 import { Tarjeta } from '@/componentes/ui/Tarjeta/Tarjeta';
 import { Boton } from '@/componentes/ui/Boton/Boton';
 import { Edit2, Trash2, BrainCircuit } from 'lucide-react';
-import estilos from './TarjetaAsistente.module.css';
+
 import { useRouter } from 'next/navigation';
 
 /**
@@ -28,46 +28,49 @@ export const TarjetaAsistente: React.FC<PropsTarjetaAsistente> = ({
     };
 
     return (
-        <Tarjeta className={estilos.tarjeta}>
-            <div className={estilos.contenido}>
-                <div className={estilos.cabecera}>
-                    <div className={estilos.avatar}>
+        <Tarjeta className="w-full hover:border-primary/50 transition-colors duration-300 group">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 gap-4">
+                {/* Sección de Información (Izquierda) */}
+                <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex-shrink-0 flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform duration-300">
                         {asistente.nombre.charAt(0).toUpperCase()}
                     </div>
-                    <div className={estilos.info}>
-                        <h3 className={estilos.nombre}>{asistente.nombre}</h3>
-                        <div className={estilos.datos}>
-                            <span className={estilos.etiqueta}>{asistente.idioma}</span>
-                            <span className={estilos.etiqueta}>{asistente.tono}</span>
+                    <div className="flex flex-col gap-1 min-w-0">
+                        <h3 className="font-semibold text-lg truncate group-hover:text-primary transition-colors">{asistente.nombre}</h3>
+                        <div className="flex gap-2 flex-wrap">
+                            <span className="text-xs bg-muted px-2 py-0.5 rounded-full text-muted-foreground font-medium whitespace-nowrap">{asistente.idioma}</span>
+                            <span className="text-xs bg-muted px-2 py-0.5 rounded-full text-muted-foreground font-medium whitespace-nowrap">{asistente.tono}</span>
                         </div>
                     </div>
                 </div>
 
-                <div className={estilos.acciones}>
+                {/* Sección de Acciones (Derecha) */}
+                <div className="flex items-center gap-3 w-full sm:w-auto justify-end mt-2 sm:mt-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/50">
                     <Boton
                         variante="secundario"
                         tamano="sm"
-                        onClick={() => alEditar(asistente)}
-                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
-                        icono={<Edit2 size={14} />}
+                        onClick={(e) => { e.stopPropagation(); alEditar(asistente); }}
+                        className="h-9 px-3 text-xs hover:border-primary/50"
+                        icono={<Edit2 size={16} className="transition-transform duration-300 group-hover:rotate-12" />}
                     >
                         Editar
                     </Boton>
 
                     <Boton
                         variante="primario"
-                        onClick={manejarEntrenamiento}
-                        style={{ padding: '0.5rem 1.5rem', minWidth: '120px' }}
-                        icono={<BrainCircuit size={18} />}
+                        onClick={(e) => { e.stopPropagation(); manejarEntrenamiento(); }}
+                        className="h-9 px-4 min-w-[100px] hover:shadow-md hover:shadow-primary/20 transition-all duration-300"
+                        icono={<BrainCircuit size={16} className="animate-pulse" />}
                     >
                         Entrenar
                     </Boton>
 
                     <Boton
                         variante="peligro"
-                        onClick={() => alEliminar(asistente.id)}
-                        style={{ padding: '0.4rem' }}
-                        icono={<Trash2 size={16} />}
+                        tamano="sm"
+                        onClick={(e) => { e.stopPropagation(); alEliminar(asistente.id); }}
+                        className="h-9 w-9 px-0 sm:ml-2 hover:bg-destructive/90 transition-colors"
+                        icono={<Trash2 size={16} className="transition-transform duration-300 hover:scale-125 hover:rotate-6" />}
                         aria-label="Eliminar asistente"
                     />
                 </div>

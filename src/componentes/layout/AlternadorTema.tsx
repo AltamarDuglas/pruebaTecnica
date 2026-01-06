@@ -18,23 +18,19 @@ export const AlternadorTema: React.FC = () => {
         const temaGuardado = localStorage.getItem('tema');
         const prefiereOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Since default global CSS is now Dark/Funnelhot, we must explicitly set 'light' if preferred
-        // Default is dark if no preference or if system prefers dark
+        // Lógica de fallback para establecer el tema inicial basado en localStorage o preferencia del sistema
         if (temaGuardado === 'light') {
             setEsOscuro(false);
-            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.remove('dark');
         } else if (temaGuardado === 'dark') {
             setEsOscuro(true);
-            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.add('dark');
         } else if (prefiereOscuro) {
-            // System preference fallback
             setEsOscuro(true);
-            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.classList.add('dark');
         } else {
-            // Fallback to light if system is light and no storage? 
-            // Actually if default CSS is dark, and system is light, we should set light.
             setEsOscuro(false);
-            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.classList.remove('dark');
         }
     }, []);
 
@@ -42,9 +38,14 @@ export const AlternadorTema: React.FC = () => {
         const nuevoEstado = !esOscuro;
         setEsOscuro(nuevoEstado);
 
-        const tema = nuevoEstado ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', tema);
-        localStorage.setItem('tema', tema);
+        // Actualizamos clase en HTML y guardamos en localStorage
+        if (nuevoEstado) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('tema', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('tema', 'light');
+        }
     };
 
     if (!montado) return null; // Evitar hidratación mismatch

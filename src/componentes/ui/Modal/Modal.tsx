@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import estilos from './Modal.module.css';
+
 import { X } from 'lucide-react';
 
 interface PropsModal {
@@ -43,18 +43,34 @@ export const Modal: React.FC<PropsModal> = ({
     if (!abierto) return null;
 
     return (
-        <div className={estilos.overlay} onClick={alCerrar}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[4px] animate-in fade-in duration-200" onClick={alCerrar}>
             {/* stopPropagation para que click en el modal no lo cierre */}
-            <div className={estilos.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={estilos.cabecera}>
-                    <h2 className={estilos.titulo}>{titulo}</h2>
-                    <button className={estilos.botonCerrar} onClick={alCerrar}>
+            <div
+                className="bg-background w-[90%] max-w-[600px] rounded-lg shadow-lg flex flex-col max-h-[90vh] animate-in slide-in-from-bottom-5 zoom-in-95 duration-300 border border-border"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className="flex items-center justify-between p-6 border-b border-border">
+                    <h2 className="text-xl font-semibold text-foreground m-0">{titulo}</h2>
+                    <button
+                        className="flex items-center justify-center p-1 rounded-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                        onClick={alCerrar}
+                    >
                         <X size={24} />
                     </button>
                 </div>
-                <div className={estilos.contenido}>
+                <div className="p-4 overflow-y-auto no-scrollbar">
                     {children}
                 </div>
+                {/* CSS styles for no-scrollbar are better handled in globals or a utility class if reused often, but here it's specific */}
+                <style jsx>{`
+                    .no-scrollbar::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .no-scrollbar {
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
+                    }
+                `}</style>
             </div>
         </div>
     );

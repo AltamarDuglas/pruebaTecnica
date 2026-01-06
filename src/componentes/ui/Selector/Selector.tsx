@@ -1,5 +1,5 @@
 import React from 'react';
-import estilos from './Selector.module.css';
+
 import { ChevronDown } from 'lucide-react';
 
 interface Opcion {
@@ -28,17 +28,17 @@ export const Selector: React.FC<PropsSelector> = ({
     const selectId = id || React.useId();
 
     return (
-        <div className={`${estilos.contenedor} ${className}`}>
+        <div className={`flex flex-col gap-1.5 w-full ${className}`}>
             {etiqueta && (
-                <label htmlFor={selectId} className={estilos.etiqueta}>
+                <label htmlFor={selectId} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                     {etiqueta}
                 </label>
             )}
 
-            <div className={estilos.wrapperSelect}>
+            <div className="relative flex items-center">
                 <select
                     id={selectId}
-                    className={`${estilos.select} ${error ? estilos.errorSelect : ''}`}
+                    className={`flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none transition-colors ${error ? 'border-destructive' : ''}`}
                     {...props}
                 >
                     <option value="" disabled>Selecciona una opción</option>
@@ -48,10 +48,10 @@ export const Selector: React.FC<PropsSelector> = ({
                         </option>
                     ))}
                 </select>
-                <ChevronDown size={16} className={estilos.iconoFlecha} />
+                <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
             </div>
 
-            {error && <span className={estilos.mensajeError}>{error}</span>}
+            {error && <span className="text-xs text-destructive">{error}</span>}
         </div>
     );
 };

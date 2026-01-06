@@ -7,7 +7,7 @@ import { Asistente } from '@/dominio/tipos';
 import { FormularioEntrenamiento } from '@/componentes/funcionalidades/Entrenamiento/FormularioEntrenamiento';
 import { Boton } from '@/componentes/ui/Boton/Boton';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import estilos from './page.module.css';
+
 
 // TODO: Importar Simulador de Chat
 import { SimuladorChat } from '@/componentes/funcionalidades/Entrenamiento/SimuladorChat';
@@ -57,18 +57,18 @@ export default function PaginaEntrenamiento() {
 
     if (cargando) {
         return (
-            <div className={estilos.contenedorCentro}>
-                <Loader2 className={estilos.spinner} size={40} />
+            <div className="flex flex-col items-center justify-center min-h-screen gap-4 text-muted-foreground">
+                <Loader2 className="animate-spin text-primary" size={40} />
             </div>
         );
     }
 
     if (error || !asistente) {
         return (
-            <div className={estilos.contenedorCentro}>
-                <h2 className={estilos.tituloError}>Error</h2>
-                <p>{error}</p>
-                <Boton onClick={() => router.push('/')} variante="secundario" style={{ marginTop: '1rem' }}>
+            <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+                <h2 className="text-2xl font-bold text-destructive">Error</h2>
+                <p className="text-muted-foreground">{error}</p>
+                <Boton onClick={() => router.push('/')} variante="secundario" className="mt-4">
                     Volver al Inicio
                 </Boton>
             </div>
@@ -76,30 +76,29 @@ export default function PaginaEntrenamiento() {
     }
 
     return (
-        <div className={estilos.pageContainer}>
-            <header className={estilos.header}>
+        <div className="container mx-auto h-[calc(100vh-2rem)] py-4 max-w-[1400px] flex flex-col gap-4">
+            <header className="flex flex-col gap-4 pb-4 border-b border-border">
                 <Boton
-                    variante="secundario"
+                    variante="fantasma"
                     onClick={() => router.push('/')}
-                    className={estilos.backButton}
+                    className="pl-0 hover:bg-transparent hover:text-primary gap-2 self-start"
                     icono={<ArrowLeft size={20} />}
-                    style={{ border: 'none', background: 'transparent', paddingLeft: 0, boxShadow: 'none' }}
                 >
-                    <span className={estilos.backText}>Volver</span>
+                    <span className="font-medium">Volver</span>
                 </Boton>
 
-                <div className={estilos.headerInfo}>
-                    <h1 className={estilos.assistantName}>{asistente.nombre}</h1>
-                    <div className={estilos.badges}>
-                        <span className={estilos.badge}>{asistente.idioma}</span>
-                        <span className={estilos.badge}>{asistente.tono}</span>
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <h1 className="text-3xl font-bold tracking-tight">{asistente.nombre}</h1>
+                    <div className="flex gap-2">
+                        <span className="bg-muted px-2.5 py-0.5 rounded-full text-sm font-medium text-muted-foreground border border-border">{asistente.idioma}</span>
+                        <span className="bg-muted px-2.5 py-0.5 rounded-full text-sm font-medium text-muted-foreground border border-border">{asistente.tono}</span>
                     </div>
                 </div>
             </header>
 
-            <div className={estilos.contentGrid}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
                 {/* Columna Izquierda: Entrenamiento */}
-                <div className={estilos.column}>
+                <div className="flex flex-col h-full min-h-0 animate-in slide-in-from-left-4 duration-500">
                     <FormularioEntrenamiento
                         asistente={asistente}
                         alGuardar={manejarGuardarEntrenamiento}
@@ -107,10 +106,10 @@ export default function PaginaEntrenamiento() {
                 </div>
 
                 {/* Columna Derecha: Chat */}
-                <div className={estilos.column}>
+                <div className="flex flex-col h-full min-h-0 animate-in slide-in-from-right-4 duration-500 delay-100">
                     <SimuladorChat />
                 </div>
             </div>
         </div>
     );
-}
+};

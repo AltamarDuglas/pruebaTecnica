@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Asistente } from '@/dominio/tipos';
 import { Boton } from '@/componentes/ui/Boton/Boton';
 import { Save } from 'lucide-react';
-import estilos from './FormularioEntrenamiento.module.css';
+
 
 /**
  * Formulario para editar las instrucciones de entrenamiento (System Prompt).
@@ -51,19 +51,19 @@ export const FormularioEntrenamiento: React.FC<PropsFormularioEntrenamiento> = (
     };
 
     return (
-        <div className={estilos.contenedor}>
+        <div className="flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden shadow-sm">
             {/* Title and Description handled by parent page */}
 
             <textarea
-                className={estilos.areaTexto}
+                className="flex-1 p-6 w-full resize-none bg-transparent border-none focus:ring-1 focus:ring-ring focus:outline-none text-base leading-relaxed h-full"
                 value={instrucciones}
                 onChange={manejarCambio}
                 placeholder="Ej: Eres un asistente experto en plantas. Tu objetivo es ayudar a los clientes a elegir la mejor maceta..."
             />
 
-            <div className={estilos.pie}>
-                {sucio && <span className={estilos.indicadorSinGuardar}>Cambios sin guardar</span>}
-                {mostrarExito && !sucio && <span className={estilos.indicadorExito}>¡Guardado correctamente!</span>}
+            <div className="flex justify-end items-center gap-4 p-4 bg-muted/20 border-t border-border">
+                {sucio && <span className="text-sm text-amber-500 font-medium animate-pulse">Cambios sin guardar</span>}
+                {mostrarExito && !sucio && <span className="text-sm text-green-500 font-medium animate-in fade-in duration-300">¡Guardado correctamente!</span>}
 
                 <Boton
                     onClick={manejarGuardar}

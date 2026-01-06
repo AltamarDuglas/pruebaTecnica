@@ -1,7 +1,7 @@
 import React from 'react';
 import { CampoTexto } from '@/componentes/ui/CampoTexto/CampoTexto';
 import { Selector } from '@/componentes/ui/Selector/Selector';
-import estilos from './PasoInfoBasica.module.css';
+
 import { CrearAsistenteDTO } from '@/dominio/tipos';
 
 interface PropsPasoInfoBasica {
@@ -31,7 +31,7 @@ export const PasoInfoBasica: React.FC<PropsPasoInfoBasica> = ({
     errores
 }) => {
     return (
-        <div className={estilos.contenedor}>
+        <div className="flex flex-col gap-4">
             <CampoTexto
                 etiqueta="Nombre del Asistente *"
                 placeholder="Ej. Asistente de Ventas"
@@ -40,7 +40,7 @@ export const PasoInfoBasica: React.FC<PropsPasoInfoBasica> = ({
                 error={errores.nombre}
             />
 
-            <div className={estilos.dosColumnas}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Selector
                     etiqueta="Idioma Principal *"
                     opciones={OPCIONES_IDIOMA}

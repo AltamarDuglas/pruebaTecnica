@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import estilos from './Tarjeta.module.css';
+
 
 interface PropsTarjeta {
     titulo?: string; // title -> titulo
@@ -22,22 +22,22 @@ export const Tarjeta: React.FC<PropsTarjeta> = ({
 }) => {
     return (
         <div
-            className={`${estilos.tarjeta} ${className}`}
+            className={`bg-surface text-card-foreground border border-border shadow-sm rounded-lg overflow-hidden flex flex-col ${className}`}
             onClick={onClick}
             style={onClick ? { cursor: 'pointer' } : undefined}
         >
             {titulo && (
-                <div className={estilos.cabecera}>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 600 }}>{titulo}</h3>
+                <div className="px-6 py-4 border-b border-border bg-muted/10">
+                    <h3 className="m-0 text-lg font-semibold">{titulo}</h3>
                 </div>
             )}
 
-            <div className={estilos.cuerpo}>
+            <div className="p-6">
                 {children}
             </div>
 
             {pie && (
-                <div className={estilos.pie}>
+                <div className="px-6 py-4 border-t border-border bg-muted/10 flex items-center">
                     {pie}
                 </div>
             )}
