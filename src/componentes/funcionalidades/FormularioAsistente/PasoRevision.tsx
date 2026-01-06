@@ -1,14 +1,14 @@
 import React from 'react';
 import estilos from './PasoRevision.module.css';
 import { CrearAsistenteDTO } from '@/dominio/tipos';
-import { BarraProgreso } from '@/componentes/ui/BarraProgreso/BarraProgreso';
+//import { BarraProgreso } from '@/componentes/ui/BarraProgreso/BarraProgreso';
 
 interface PropsPasoRevision {
     datos: Partial<CrearAsistenteDTO>;
 }
 
 export const PasoRevision: React.FC<PropsPasoRevision> = ({ datos }) => {
-    const config = datos.configuracionLongitudRespuesta || { corta: 0, media: 0, larga: 0 };
+    const config = datos.longitudRespuesta || { corta: 0, media: 0, larga: 0 };
 
     return (
         <div className={estilos.contenedor}>
@@ -27,7 +27,7 @@ export const PasoRevision: React.FC<PropsPasoRevision> = ({ datos }) => {
                 </div>
                 <div className={estilos.fila}>
                     <span className={estilos.etiqueta}>Audio</span>
-                    <span className={estilos.valor}>{datos.habilitarAudio ? 'Habilitado' : 'Deshabilitado'}</span>
+                    <span className={estilos.valor}>{datos.audioHabilitado ? 'Habilitado' : 'Deshabilitado'}</span>
                 </div>
             </div>
 

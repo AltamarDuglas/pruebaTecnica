@@ -3,7 +3,7 @@
 .contenedor {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     animation: aparecer 0.3s ease-out;
 }
 
@@ -22,9 +22,9 @@
 .resumen {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     background-color: var(--background);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
 }

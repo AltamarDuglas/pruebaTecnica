@@ -1,7 +1,7 @@
 /* ModalCrearAsistente.module.css */
 
 .contenedorPasos {
-    min-height: 350px;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
 }
@@ -10,8 +10,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
     border-top: 1px solid var(--border);
 }
 
@@ -21,7 +21,7 @@
     align-items: flex-start;
     /* Align top to handle labels below */
     justify-content: space-between;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
     padding: 0 10%;
     /* Indent to center the bar more */
     position: relative;
@@ -54,8 +54,8 @@
 
 /* Base Circle */
 .pasoCirculo {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: var(--surface);
     border: 2px solid var(--border);

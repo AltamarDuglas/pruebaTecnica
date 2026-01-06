@@ -70,12 +70,10 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
                 <p>Define la probabilidad de que el asistente genere respuestas de cierta longitud.</p>
             </div>
 
-            {/* Barra de visualización total */}
-            <BarraProgreso
-                progreso={100}
-                etiqueta="Distribución Total (Debe ser 100%)"
-            // En una implementación real más compleja, pasaríamos segmentos de colores
-            />
+            {/* Visualización simplificada sin BarraProgreso para ahorrar espacio vertical si es necesario, 
+               o mantenemos si cabe. Al reducir márgenes debería caber. 
+               Dejamos comentado si queremos ganarle más espacio explícitamente.
+            */}
 
             <div className={estilos.filaSliders}>
                 <GrupoSlider

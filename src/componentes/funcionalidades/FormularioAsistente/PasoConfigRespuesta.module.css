@@ -3,7 +3,7 @@
 .contenedor {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     animation: aparecer 0.3s ease-out;
 }
 
@@ -24,7 +24,7 @@
     font-size: 0.9rem;
     background-color: var(--background);
     /* Changed from surface for depth */
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
 }
@@ -32,10 +32,10 @@
 .filaSliders {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     background-color: var(--background);
     /* Inset grouping */
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     border-radius: var(--radius-lg);
     border: 1px solid var(--border);
 }
@@ -81,7 +81,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
     background-color: var(--background);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);

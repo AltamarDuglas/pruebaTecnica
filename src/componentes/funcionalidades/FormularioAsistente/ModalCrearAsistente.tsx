@@ -134,8 +134,7 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
             alCerrar={alCerrar}
             titulo={datosIniciales ? 'Editar Asistente' : 'Crear Nuevo Asistente'}
         >
-            {/* Stepper moved to top, using new styles */}
-            {/* Stepper with Labels */}
+            {/* Stepper con labels */}
             <div className={estilos.indicadorPasosSuperior}>
                 {/* Step 1 */}
                 <div className={`${estilos.pasoItem} ${paso >= 1 ? estilos.activo : ''} ${paso > 1 ? estilos.completado : ''}`}>
