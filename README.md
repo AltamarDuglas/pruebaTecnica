@@ -2,7 +2,7 @@
 
 Hola, esta es mi entrega para la prueba técnica. El objetivo fue crear una aplicación robusta para gestionar y entrenar asistentes virtuales, enfocándome principalmente en la arquitectura frontend y la experiencia de usuario.
 
-## 🚀 Instrucciones para correr el proyecto
+## Instrucciones para correr el proyecto
 
 Es un proyecto estándar de Next.js, así que no tiene misterio:
 
@@ -17,7 +17,7 @@ Es un proyecto estándar de Next.js, así que no tiene misterio:
     ```
     Y abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## 🛠️ Decisiones Técnicas
+##  Decisiones Técnicas
 
 Opté por una arquitectura que escale bien y sea fácil de mantener, no solo "que funcione":
 
@@ -28,7 +28,7 @@ Opté por una arquitectura que escale bien y sea fácil de mantener, no solo "qu
 *   **Principios SOLID**: Intenté aplicarlos en todo el frontend. Por ejemplo, el Principio de Responsabilidad Única (SRP) en los componentes (el Modal solo orquesta, los Pasos renderizan) y la Inversión de Dependencias (hooks dependiendo de interfaces, no de implementaciones).
 *   **CSS Modules**: Para mantener los estilos encapsulados y evitar que un cambio en un botón rompa el layout de otra página.
 
-## ✨ Características Implementadas
+##  Características Implementadas
 
 *   **Gestión Completa (CRUD)**: Puedes crear, listar, editar y eliminar asistentes.
 *   **Wizard de Creación**: Un formulario de 2 pasos ("Info" y "Configuración") con validaciones en tiempo real.
@@ -36,22 +36,19 @@ Opté por una arquitectura que escale bien y sea fácil de mantener, no solo "qu
 *   **Simulador de Chat**: Una interfaz para probar cómo respondería el asistente según su configuración.
 *   **Apariencia**: Tema Oscuro/Claro persistente y diseño responsive adaptado a móvil y desktop.
 
-## ⚖️ Trade-offs: Qué dejé fuera y por qué
+## Trade-offs: Qué dejé fuera y por qué
 
 Tuve que priorizar para entregar valor en el tiempo estimado:
 
-*   **Backend Real / API**: Decidí no montarlo y usar `LocalStorage`.
-    *   *Razón*: Preferí dedicar el tiempo a demostrar buenas prácticas de arquitectura frontend y UI/UX, que es donde el usuario percibe la calidad inmediata. La arquitectura actual permite conectar el backend fácilmente después.
 *   **Tests Automatizados (Jest/Cypress)**:
     *   *Razón*: Aunque la arquitectura está diseñada para ser ultra-testeable (lógica separada de UI), configurar el entorno de testing y escribir cobertura decente me habría llevado más tiempo del límite. Prioricé la funcionalidad y el acabado visual.
 
-## ⏱️ Tiempo de Dedicación
+## Tiempo de Dedicación
 
 **Aproximadamente 4.5 horas** distribuidas en:
 *   Planteamiento de arquitectura y estructura inicial.
 *   Desarrollo de componentes UI y sistema de diseño.
 *   Implementación de lógica compleja (Formulario wizard y estado).
 *   Refinamiento visual y responsive.
-
 ---
-Espero que el código sea de su agrado. ¡Cualquier feedback es bienvenido!
+Espero que el código sea de su agrado. Cualquier feedback es bienvenido
