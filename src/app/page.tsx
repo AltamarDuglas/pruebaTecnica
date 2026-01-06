@@ -1,66 +1,78 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { useAsistentes } from '@/hooks/useAsistentes';
+import { GrillaAsistentes } from '@/componentes/funcionalidades/ListadoAsistentes/GrillaAsistentes';
+import { Asistente } from '@/dominio/tipos';
+import { Boton } from '@/componentes/ui/Boton/Boton';
+import { Plus } from 'lucide-react';
+import estilos from './page.module.css';
+
+// TODO: Importar Modal de Creación cuando esté implementado
+// import { ModalCrearAsistente } from '@/componentes/funcionalidades/FormularioAsistente/ModalCrearAsistente';
+
+export default function Inicio() {
+  const { asistentes, cargando, eliminarAsistente, refrescar } = useAsistentes();
+  const [modalAbierto, setModalAbierto] = useState(false);
+  const [asistenteEnEdicion, setAsistenteEnEdicion] = useState<Asistente | null>(null);
+
+  const manejarEliminar = async (id: string) => {
+    if (confirm('¿Estás seguro de que quieres eliminar este asistente? Esta acción no se puede deshacer.')) {
+      await eliminarAsistente(id);
+    }
+  };
+
+  const manejarEditar = (asistente: Asistente) => {
+    console.log("Editando", asistente); // Temporal
+    setAsistenteEnEdicion(asistente);
+    setModalAbierto(true);
+  };
+
+  const manejarCrear = () => {
+    console.log("Creando nuevo"); // Temporal
+    setAsistenteEnEdicion(null);
+    setModalAbierto(true);
+  };
+
+  const manejarCerrarModal = () => {
+    setModalAbierto(false);
+    setAsistenteEnEdicion(null);
+  };
+
+  const manejarExito = () => {
+    manejarCerrarModal();
+    refrescar();
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className={estilos.contenedor}>
+      <div className={estilos.tarjetaPrincipal}>
+        <div className={estilos.filaCabecera}>
+          <h2 className={estilos.titulo}>Asistentes IA</h2>
+
+          <Boton onClick={manejarCrear} icono={<Plus size={18} />}>
+            Creación
+          </Boton>
+        </div>
+
+        <GrillaAsistentes
+          asistentes={asistentes}
+          cargando={cargando}
+          alEditar={manejarEditar}
+          alEliminar={manejarEliminar}
+          alCrear={manejarCrear}
         />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
+
+      {/* TODO: Integrar Modal Real */}
+      {/* 
+      <ModalCrearAsistente
+        abierto={modalAbierto}
+        alCerrar={manejarCerrarModal}
+        datosIniciales={asistenteEnEdicion}
+        alExito={manejarExito}
+      /> 
+      */}
     </div>
   );
 }
