@@ -21,24 +21,30 @@
 
 .select {
     width: 100%;
-    padding: 0.6rem 0.8rem;
+    padding: 0.75rem 1rem;
     padding-right: 2.5rem;
     /* Espacio para el icono de flecha */
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     font-size: 0.95rem;
-    background-color: var(--surface);
+    background-color: var(--background);
     appearance: none;
-    /* Quitamos estilo default del navegador */
     cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease;
     color: var(--text-primary);
+}
+
+.select:hover {
+    border-color: var(--primary-light, #a5b4fc);
+    background-color: var(--surface);
 }
 
 .select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    background-color: var(--surface);
+    box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.15);
+    /* Primary Rose glow */
 }
 
 .iconoFlecha {

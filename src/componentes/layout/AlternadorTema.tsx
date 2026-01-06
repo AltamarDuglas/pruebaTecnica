@@ -18,9 +18,23 @@ export const AlternadorTema: React.FC = () => {
         const temaGuardado = localStorage.getItem('tema');
         const prefiereOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (temaGuardado === 'dark' || (!temaGuardado && prefiereOscuro)) {
+        // Since default global CSS is now Dark/Funnelhot, we must explicitly set 'light' if preferred
+        // Default is dark if no preference or if system prefers dark
+        if (temaGuardado === 'light') {
+            setEsOscuro(false);
+            document.documentElement.setAttribute('data-theme', 'light');
+        } else if (temaGuardado === 'dark') {
             setEsOscuro(true);
             document.documentElement.setAttribute('data-theme', 'dark');
+        } else if (prefiereOscuro) {
+            // System preference fallback
+            setEsOscuro(true);
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            // Fallback to light if system is light and no storage? 
+            // Actually if default CSS is dark, and system is light, we should set light.
+            setEsOscuro(false);
+            document.documentElement.setAttribute('data-theme', 'light');
         }
     }, []);
 

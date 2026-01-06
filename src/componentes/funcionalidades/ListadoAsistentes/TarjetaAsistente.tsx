@@ -29,46 +29,48 @@ export const TarjetaAsistente: React.FC<PropsTarjetaAsistente> = ({
 
     return (
         <Tarjeta className={estilos.tarjeta}>
-            <div className={estilos.cabecera}>
-                <div className={estilos.avatar}>
-                    {asistente.nombre.charAt(0).toUpperCase()}
-                </div>
-                <div className={estilos.info}>
-                    <h3 className={estilos.nombre}>{asistente.nombre}</h3>
-                    <div className={estilos.datos}>
-                        <span className={estilos.etiqueta}>{asistente.idioma}</span>
-                        <span className={estilos.etiqueta}>{asistente.tono}</span>
+            <div className={estilos.contenido}>
+                <div className={estilos.cabecera}>
+                    <div className={estilos.avatar}>
+                        {asistente.nombre.charAt(0).toUpperCase()}
+                    </div>
+                    <div className={estilos.info}>
+                        <h3 className={estilos.nombre}>{asistente.nombre}</h3>
+                        <div className={estilos.datos}>
+                            <span className={estilos.etiqueta}>{asistente.idioma}</span>
+                            <span className={estilos.etiqueta}>{asistente.tono}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className={estilos.acciones}>
-                <Boton
-                    variante="secundario"
-                    tamano="sm"
-                    onClick={() => alEditar(asistente)}
-                    style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
-                    icono={<Edit2 size={14} />}
-                >
-                    Editar
-                </Boton>
+                <div className={estilos.acciones}>
+                    <Boton
+                        variante="secundario"
+                        tamano="sm"
+                        onClick={() => alEditar(asistente)}
+                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+                        icono={<Edit2 size={14} />}
+                    >
+                        Editar
+                    </Boton>
 
-                <Boton
-                    variante="primario"
-                    onClick={manejarEntrenamiento}
-                    style={{ flex: 1, padding: '0.4rem' }}
-                    icono={<BrainCircuit size={16} />}
-                >
-                    Entrenar
-                </Boton>
+                    <Boton
+                        variante="primario"
+                        onClick={manejarEntrenamiento}
+                        style={{ padding: '0.5rem 1.5rem', minWidth: '120px' }}
+                        icono={<BrainCircuit size={18} />}
+                    >
+                        Entrenar
+                    </Boton>
 
-                <Boton
-                    variante="peligro"
-                    onClick={() => alEliminar(asistente.id)}
-                    style={{ padding: '0.4rem' }}
-                    icono={<Trash2 size={16} />}
-                    aria-label="Eliminar asistente"
-                />
+                    <Boton
+                        variante="peligro"
+                        onClick={() => alEliminar(asistente.id)}
+                        style={{ padding: '0.4rem' }}
+                        icono={<Trash2 size={16} />}
+                        aria-label="Eliminar asistente"
+                    />
+                </div>
             </div>
         </Tarjeta>
     );

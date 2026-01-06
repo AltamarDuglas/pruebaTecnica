@@ -22,7 +22,8 @@
 .descripcion {
     color: var(--text-secondary);
     font-size: 0.9rem;
-    background-color: var(--surface);
+    background-color: var(--background);
+    /* Changed from surface for depth */
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
@@ -32,6 +33,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    background-color: var(--background);
+    /* Inset grouping */
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
 }
 
 .grupoSlider {
@@ -58,13 +64,16 @@
     cursor: pointer;
     height: 6px;
     border-radius: 999px;
-    background: var(--border);
+    background: var(--surface);
+    /* Contrast against bg */
+    border: 1px solid var(--border);
     outline: none;
     transition: all 0.2s;
 }
 
 .inputRango:focus {
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2);
+    /* Rose glow */
 }
 
 /* Estilos para el switch de Audio */
@@ -76,6 +85,11 @@
     background-color: var(--background);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
+    transition: border-color 0.2s;
+}
+
+.filaSwitch:hover {
+    border-color: var(--primary-hover);
 }
 
 .switchEtiqueta {
@@ -86,6 +100,7 @@
 .tituloSwitch {
     font-weight: 600;
     font-size: 0.95rem;
+    color: var(--text-primary);
 }
 
 .descSwitch {
@@ -96,8 +111,9 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 44px;
-    height: 24px;
+    width: 48px;
+    /* Slightly larger */
+    height: 26px;
 }
 
 .switch input {
@@ -113,27 +129,30 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
+    background-color: var(--border);
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 24px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
     left: 3px;
     bottom: 3px;
     background-color: white;
-    transition: .4s;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 input:checked+.slider {
     background-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
+    /* Glow */
 }
 
 input:checked+.slider:before {
-    transform: translateX(20px);
+    transform: translateX(22px);
 }

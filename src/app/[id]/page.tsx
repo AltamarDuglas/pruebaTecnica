@@ -76,45 +76,39 @@ export default function PaginaEntrenamiento() {
     }
 
     return (
-        <div className={estilos.contenedorPagina}>
-            {/* Breadcrumb removed */}
+        <div className={estilos.pageContainer}>
+            <header className={estilos.header}>
+                <Boton
+                    variante="secundario"
+                    onClick={() => router.push('/')}
+                    className={estilos.backButton}
+                    icono={<ArrowLeft size={20} />}
+                    style={{ border: 'none', background: 'transparent', paddingLeft: 0, boxShadow: 'none' }}
+                >
+                    <span className={estilos.backText}>Volver</span>
+                </Boton>
 
-            <div className={estilos.tarjetaPrincipal}>
-                {/* Top Section: Datos del Asistente */}
-                <div className={estilos.seccionDatos}>
-                    <h3 className={estilos.tituloSeccion}>DATOS DEL ASISTENTE</h3>
-                    <div className={estilos.infoDatos}>
-                        <div className={estilos.datoItem}>
-                            <span className={estilos.labelDato}>Nombre:</span>
-                            <span className={estilos.valorDato}>{asistente.nombre}</span>
-                        </div>
-                        <div className={estilos.datoItem}>
-                            <span className={estilos.labelDato}>Idioma:</span>
-                            <span className={estilos.valorDato}>{asistente.idioma}</span>
-                        </div>
-                        <div className={estilos.datoItem}>
-                            <span className={estilos.labelDato}>Tono:</span>
-                            <span className={estilos.valorDato}>{asistente.tono}</span>
-                        </div>
+                <div className={estilos.headerInfo}>
+                    <h1 className={estilos.assistantName}>{asistente.nombre}</h1>
+                    <div className={estilos.badges}>
+                        <span className={estilos.badge}>{asistente.idioma}</span>
+                        <span className={estilos.badge}>{asistente.tono}</span>
                     </div>
                 </div>
+            </header>
 
-                {/* Split Content: Form & Chat */}
-                <div className={estilos.contenidoSplit}>
-                    <div className={estilos.panelIzquierdo}>
-                        <h3 className={estilos.tituloPanel}>Entrenamiento del asistente:</h3>
-                        <p className={estilos.descPanel}>Sólo persistencia de datos en local. Que al refrescar la data permanezca una vez se le da guardar</p>
-                        <FormularioEntrenamiento
-                            asistente={asistente}
-                            alGuardar={manejarGuardarEntrenamiento}
-                        />
-                    </div>
+            <div className={estilos.contentGrid}>
+                {/* Columna Izquierda: Entrenamiento */}
+                <div className={estilos.column}>
+                    <FormularioEntrenamiento
+                        asistente={asistente}
+                        alGuardar={manejarGuardarEntrenamiento}
+                    />
+                </div>
 
-                    <div className={estilos.panelDerecho}>
-                        <h3 className={estilos.tituloPanel}>CHAT SIMULADO:</h3>
-                        <p className={estilos.descPanel}>Las respuestas son completamente simuladas, se pueden obtener de un JSON, deben tener delay para simular el fetch de la data...</p>
-                        <SimuladorChat />
-                    </div>
+                {/* Columna Derecha: Chat */}
+                <div className={estilos.column}>
+                    <SimuladorChat />
                 </div>
             </div>
         </div>

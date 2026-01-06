@@ -1,123 +1,124 @@
-/* page.module.css (Entrenamiento) */
+/* page.module.css */
 
-.contenedorPagina {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: var(--spacing-lg);
-}
-
-/* .ruta removed */
-
-.tarjetaPrincipal {
-    background-color: transparent;
-    border: 1px solid var(--text-primary);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    min-height: 600px;
+.pageContainer {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
+    animation: fadeIn 0.3s ease-out;
 }
 
-.seccionDatos {
-    border: 1px solid var(--text-primary);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-}
-
-.tituloSeccion {
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: var(--spacing-md);
-    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-    /* Sketchy feel */
-}
-
-.infoDatos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xl);
-}
-
-.datoItem {
-    display: flex;
-    gap: var(--spacing-sm);
-    align-items: center;
-}
-
-.labelDato {
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-
-.valorDato {
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.contenidoSplit {
-    display: flex;
-    gap: var(--spacing-xl);
-    flex: 1;
-}
-
-.panelIzquierdo,
-.panelDerecho {
-    flex: 1;
-    border: 1px solid var(--text-primary);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-}
-
-.tituloPanel {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-}
-
-.descPanel {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-lg);
-    font-style: italic;
-}
-
-@media (max-width: 1024px) {
-    .contenidoSplit {
-        flex-direction: column;
-    }
-}
-
-.contenedorCentro {
-    height: 70vh;
+.centerContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 50vh;
     text-align: center;
-    gap: var(--spacing-md);
-}
-
-.tituloError {
-    color: var(--error);
-    font-size: 1.5rem;
 }
 
 .spinner {
-    animation: girar 1s linear infinite;
+    animation: spin 1s linear infinite;
     color: var(--primary);
 }
 
-@keyframes girar {
+@keyframes spin {
     from {
         transform: rotate(0deg);
     }
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+.errorTitle {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.backButton {
+    padding-left: 0;
+    color: var(--text-secondary);
+}
+
+.backText {
+    margin-left: 0.5rem;
+    /* Ocultar texto en pantallas muy peques */
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .backText {
+        display: inline;
+    }
+}
+
+.headerInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.assistantName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0 0.5rem;
+    color: var(--text-secondary);
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    height: auto;
+    /* En móvil dejamos que crezca */
+    min-height: 0;
+}
+
+@media (min-width: 1024px) {
+    .contentGrid {
+        grid-template-columns: 3fr 2fr;
+        height: calc(100vh - 200px);
+        min-height: 500px;
+    }
+}
+
+.column {
+    height: 100%;
+    min-height: 0;
+    /* Importante para que el scroll interno funcione en flex/grid children */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

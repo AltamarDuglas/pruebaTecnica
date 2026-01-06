@@ -134,11 +134,20 @@ export const ModalCrearAsistente: React.FC<PropsModalCrear> = ({
             alCerrar={alCerrar}
             titulo={datosIniciales ? 'Editar Asistente' : 'Crear Nuevo Asistente'}
         >
-            {/* Stepper moved to top */}
+            {/* Stepper moved to top, using new styles */}
+            {/* Stepper with Labels */}
             <div className={estilos.indicadorPasosSuperior}>
-                <div className={`${estilos.pasoCirculo} ${paso >= 1 ? estilos.activo : ''}`}>1</div>
-                <div className={estilos.lineaConectora}></div>
-                <div className={`${estilos.pasoCirculo} ${paso >= 2 ? estilos.activo : ''}`}>2</div>
+                {/* Step 1 */}
+                <div className={`${estilos.pasoItem} ${paso >= 1 ? estilos.activo : ''} ${paso > 1 ? estilos.completado : ''}`}>
+                    <div className={estilos.pasoCirculo}>1</div>
+                    <span className={estilos.pasoEtiqueta}>Información</span>
+                </div>
+
+                {/* Step 2 */}
+                <div className={`${estilos.pasoItem} ${paso === 2 ? estilos.activo : ''}`}>
+                    <div className={estilos.pasoCirculo}>2</div>
+                    <span className={estilos.pasoEtiqueta}>Configuración</span>
+                </div>
             </div>
 
             <div className={estilos.contenedorPasos}>

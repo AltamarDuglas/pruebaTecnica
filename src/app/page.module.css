@@ -9,14 +9,13 @@
 /* .ruta removed */
 
 .tarjetaPrincipal {
-  background-color: transparent;
-  border: 1px solid var(--text-primary);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   min-height: 600px;
+  box-shadow: var(--shadow-sm);
   position: relative;
-  /* Removal of shadow for sketch look */
-  box-shadow: none;
 }
 
 .filaCabecera {
@@ -28,13 +27,15 @@
 }
 
 .titulo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--primary);
+  /* Brand color for main title */
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
-  /* Sketchy feel */
+  font-family: var(--font-sans);
+  /* Cleaner sans-serif as per "professional" request */
+  margin: 0;
 }
 
 @media (max-width: 640px) {

@@ -67,7 +67,7 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
     return (
         <div className={estilos.contenedor}>
             <div className={estilos.descripcion}>
-                <p>Define la probabilidad de que el asistente genere respuestas de cierta longitud. La suma debe ser siempre 100%.</p>
+                <p>Define la probabilidad de que el asistente genere respuestas de cierta longitud.</p>
             </div>
 
             {/* Barra de visualización total */}
@@ -82,19 +82,19 @@ export const PasoConfigRespuesta: React.FC<PropsPasoConfigRespuesta> = ({
                     label="Respuestas Cortas"
                     valor={longitudes.corta}
                     onChange={(v) => manejarCambioSlider('corta', v)}
-                    color="var(--success)"
+                    color="var(--text-primary)"
                 />
                 <GrupoSlider
                     label="Respuestas Medianas"
                     valor={longitudes.media}
                     onChange={(v) => manejarCambioSlider('media', v)}
-                    color="var(--primary)"
+                    color="var(--text-primary)"
                 />
                 <GrupoSlider
                     label="Respuestas Largas"
                     valor={longitudes.larga}
                     onChange={(v) => manejarCambioSlider('larga', v)}
-                    color="var(--secondary)"
+                    color="var(--text-primary)"
                 />
             </div>
 
