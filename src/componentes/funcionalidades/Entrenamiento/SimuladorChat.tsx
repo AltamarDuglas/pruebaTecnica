@@ -103,14 +103,21 @@ export const SimuladorChat: React.FC = () => {
                     </div>
                 ))}
 
+                {/* Typing Bubble Indicator */}
+                {escribiendo && (
+                    <div className={estilos.burbujaEscribiendo}>
+                        <div className={estilos.punto}></div>
+                        <div className={estilos.punto}></div>
+                        <div className={estilos.punto}></div>
+                    </div>
+                )}
+
                 {/* Referencia invisible para scroll */}
                 <div ref={finMensajesRef} />
             </div>
 
             <div className={estilos.areaEntrada}>
-                <div className={estilos.indicadorEscribiendo}>
-                    {escribiendo && <span className={estilos.animacionPuntos}>El asistente está escribiendo</span>}
-                </div>
+                {/* Removed old text indicator */}
 
                 <form className={estilos.formulario} onSubmit={manejarEnvio}>
                     <div style={{ flex: 1 }}>
