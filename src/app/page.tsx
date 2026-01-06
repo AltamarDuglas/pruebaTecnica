@@ -8,8 +8,7 @@ import { Boton } from '@/componentes/ui/Boton/Boton';
 import { Plus } from 'lucide-react';
 import estilos from './page.module.css';
 
-// TODO: Importar Modal de Creación cuando esté implementado
-// import { ModalCrearAsistente } from '@/componentes/funcionalidades/FormularioAsistente/ModalCrearAsistente';
+import { ModalCrearAsistente } from '@/componentes/funcionalidades/FormularioAsistente/ModalCrearAsistente';
 
 export default function Inicio() {
   const { asistentes, cargando, eliminarAsistente, refrescar } = useAsistentes();
@@ -23,13 +22,11 @@ export default function Inicio() {
   };
 
   const manejarEditar = (asistente: Asistente) => {
-    console.log("Editando", asistente); // Temporal
     setAsistenteEnEdicion(asistente);
     setModalAbierto(true);
   };
 
   const manejarCrear = () => {
-    console.log("Creando nuevo"); // Temporal
     setAsistenteEnEdicion(null);
     setModalAbierto(true);
   };
@@ -64,15 +61,12 @@ export default function Inicio() {
         />
       </div>
 
-      {/* TODO: Integrar Modal Real */}
-      {/* 
       <ModalCrearAsistente
         abierto={modalAbierto}
         alCerrar={manejarCerrarModal}
         datosIniciales={asistenteEnEdicion}
         alExito={manejarExito}
-      /> 
-      */}
+      />
     </div>
   );
 }
