@@ -1,122 +1,76 @@
 # Prueba Técnica - Gestión de Asistentes
-Hola, esta es mi entrega para la prueba técnica. El objetivo fue crear una aplicación robusta para gestionar y entrenar asistentes virtuales, enfocándome principalmente en la arquitectura frontend y la experiencia de usuario.
 
-## Instrucciones para correr el proyecto
+Hola, soy Duglas (o el desarrollador). Esta es mi entrega para la prueba técnica.
+Mi objetivo principal no fue solo "hacer que funcione", sino crear una aplicación robusta, mantenible y con una arquitectura frontend sólida que escale bien. También le puse cariño a la experiencia de usuario.
 
-Es un proyecto estándar de Next.js, así que no tiene misterio:
+---
+
+## 🚀 Cómo correr el proyecto
+
+Esto es un proyecto estándar de Next.js, así que es directo:
 
 1.  **Instala las dependencias**:
     ```bash
     npm install
     ```
-
-2.  **Levanta el servidor de desarrollo**:
+2.  **Levanta el servidor**:
     ```bash
     npm run dev
     ```
-    Y abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+    Y abre [http://localhost:3000](http://localhost:3000).
 
-## Estructura del Proyecto
+---
 
-El proyecto sigue una arquitectura modular en `src/`, diseñada para separar la lógica de negocio de la interfaz:
+## 📂 Estructura del Proyecto
+
+Organicé el código en `src/` siguiendo una arquitectura modular para que se entienda qué es negocio y qué es interfaz visual:
 
 ```
 src/
-├── app/                  # App Router de Next.js
-│   ├── layout.tsx        # Layout raíz (Fuentes, Metadata)
-│   ├── page.tsx          # Página de inicio
-│   └── globals.css       # Estilos globales y variables Tailwind
-├── componentes/          # Biblioteca de componentes UI
-│   ├── ui/               # Componentes primitivos (Boton, Input, Modal)
-│   ├── funcionalidades/  # Componentes de negocio (FormularioAsistente)
-│   └── layout/           # Componentes estructurales (Header, Grid)
-├── dominio/              # Entidades y Tipos (Clean Architecture)
-│   └── tipos.ts          # Interfaces TypeScript centrales (Asistente, DTOs)
-├── servicios/            # Lógica de acceso a datos
-│   └── RepositorioAsistente.ts # Abstracción sobre LocalStorage
-├── hooks/                # Custom Hooks
-│   └── useAsistentes.ts  # Lógica reactiva para gestionar asistentes
-└── utilidades/           # Helpers y formatters
+├── app/                  # Aquí están las páginas (App Router)
+│   ├── layout.tsx        # Fuentes y metadata global
+│   ├── page.tsx          # La Home
+│   └── globals.css       # Variables de diseño
+├── componentes/          # Piezas de Lego reutilizables
+│   ├── ui/               # Botones, Modales, Inputs (tontos y puros)
+│   ├── funcionalidades/  # Componentes complejos (Formulario, Chat)
+│   └── layout/           # Header, Grid
+├── dominio/              # El corazón del negocio (Types, Interfaces)
+├── servicios/            # Cómo guardamos datos (Repository Pattern)
+└── hooks/                # Lógica de estado (useAsistentes)
 ```
 
-## Configuración para Desarrolladores
+## 🛠️ Configuración para Devs
 
-### 1. Alias de Rutas (`tsconfig.json`)
-Para mantener los imports limpios, hemos configurado el alias `@`:
-```json
-"@/*": ["./src/*"]
-```
-Esto permite importar así: `import { Boton } from '@/componentes/ui/Boton';`
+Dejé algunas cosas listas para que trabajar aquí sea cómodo:
 
-### 2. Sistema de Diseño (`tailwind.config.js`)
-El diseño no está "hardcodeado". Usamos tokens semánticos en `extend.colors`:
-- **`primary` / `secondary`**: Colores principales de la marca.
-- **`background` / `foreground`**: Permiten el modo oscuro automático.
-- **`destructive`**: Para acciones de peligro (borrar).
+- **Alias `@/`**: Configurado en `tsconfig.json` para que importes cosas como `import { Boton } from '@/componentes/ui/Boton'` en lugar de `../../`.
+- **Diseño en Código**: En `tailwind.config.js` y `globals.css` definí tokens semánticos (como `primary` o `destructive`). Así, si mañana queremos cambiar el rojo de error, lo cambiamos en un solo sitio.
+- **VS Code**: Dejé un `.vscode/settings.json` para que el editor no se queje de las reglas de Tailwind.
 
-Referencian variables CSS en `globals.css` (`--primary: 346.8 77.2% 49.8%;`).
-
-### 3. Editor (`.vscode/settings.json`)
-Incluimos una configuración de workspace para evitar falsos positivos en los linters con reglas de Tailwind (`@tailwind`, `@apply`).
-
-## Decisiones Técnicas
-
-Opté por una arquitectura que escale bien y sea fácil de mantener, no solo "que funcione":
-
-*   **Arquitectura Limpia (Clean Architecture)**: Separé el código en capas (`dominio`, `servicios`, `componentes`).
-    *   *¿Por qué?* Para que la lógica de negocio (como la validación de un asistente) no dependa de React. Si mañana cambiamos el framework UI, el dominio sigue intacto.
-*   **Patrón Repositorio**: Usé `RepositorioAsistente` para manejar los datos.
-    *   *¿Por qué?* Ahora mismo guardo todo en `LocalStorage` por simplicidad, pero gracias a esto, conectar una API real sería cuestión de crear una nueva implementación del repositorio sin tocar ni una línea de los componentes visuales.
-*   **Principios SOLID**: Intenté aplicarlos en todo el frontend. Por ejemplo, el Principio de Responsabilidad Única (SRP) en los componentes (el Modal solo orquesta, los Pasos renderizan) y la Inversión de Dependencias (hooks dependiendo de interfaces, no de implementaciones).
-*   **CSS Modules**: Para mantener los estilos encapsulados y evitar que un cambio en un botón rompa el layout de otra página.
-
-## Migración a Tailwind CSS (Refactorización)
-
-Recientemente migramos todo el proyecto de **CSS Modules** a **Tailwind CSS** buscando una UI más moderna y fácil de mantener, pero sin perder la limpieza del código.
-
-### ¿Cómo lo hicimos manteniendo SOLID?
-En lugar de llenar todos los componentes de clases de utilidad ("div soup"), seguimos una estrategia de **Componentes Primitivos**:
-
-1.  **Refactorizamos los UI Primitives (`src/componentes/ui`)**:
-    *   Componentes como `Boton`, `CampoTexto`, `Selector` y `Modal` encapsulan internamente las clases de Tailwind.
-    *   *Beneficio*: El resto de la aplicación usa `<Boton variante="primario" />` sin preocuparse si por debajo usa CSS puro o Tailwind.
-2.  **Eliminamos CSS Modules**:
-    *   Se borraron todos los archivos `*.module.css`.
-    *   Redujimos la cantidad de archivos y centralizamos la configuración de diseño en `tailwind.config.js` y `globals.css` (variables CSS).
-3.  **Animaciones "Lucid"**:
-    *   Integramos `tailwindcss-animate` para efectos de entrada (`zoom-in`, `fade-in`) y retroalimentación visual (ej: indicador de escritura con rebote).
-
-### ¿Qué se eliminó?
-*    Todos los archivos `.module.css` (código muerto).
-*   Clases CSS manuales y selectores complejos.
-
-### ¿Qué se ganó?
-*    **Consistencia**: Todos los colores, espaciados y bordes vienen del mismo sistema de diseño.
-*    **Velocidad**: Menos cambio de contexto entre archivos `.tsx` y `.css`.
-*    **Modernidad**: Tema oscuro/claro nativo y animaciones fluidas out-of-the-box.
-
-## Características Implementadas
-
-*   **Gestión Completa (CRUD)**: Puedes crear, listar, editar y eliminar asistentes.
-*   **Wizard de Creación**: Un formulario de 2 pasos ("Info" y "Configuración") con validaciones en tiempo real.
-*   **Lógica de Negocio en Frontend**: El slider de configuración de respuestas se balancea solo (si subes uno, los otros bajan para mantener el 100%).
-*   **Simulador de Chat**: Una interfaz para probar cómo respondería el asistente según su configuración.
-*   **Apariencia**: Tema Oscuro/Claro persistente y diseño responsive adaptado a móvil y desktop.
-
-## Trade-offs: Qué dejé fuera y por qué
-
-Tuve que priorizar para entregar valor en el tiempo estimado:
-
-*   **Tests Automatizados (Jest/Cypress)**:
-    *   *Razón*: Aunque la arquitectura está diseñada para ser ultra-testeable (lógica separada de UI), configurar el entorno de testing y escribir cobertura decente me habría llevado más tiempo del límite. Prioricé la funcionalidad y el acabado visual.
-
-## Tiempo de Dedicación
-
-**Aproximadamente 4.5 horas** distribuidas en:
-*   Planteamiento de arquitectura y estructura inicial.
-*   Desarrollo de componentes UI y sistema de diseño.
-*   Implementación de lógica compleja (Formulario wizard y estado).
-*   Refinamiento visual y responsive.
-*   Migracion a Tailwind CSS.
 ---
-Espero que el código sea de su agrado. Cualquier feedback es bienvenido
+
+## 🧠 Decisiones que tomé
+
+Quise aplicar buenas prácticas desde el día 1:
+
+1.  **Arquitectura Limpia**: Separé `dominio` de `componentes`. Si mañana cambiamos React por otra cosa, la lógica de negocio ni se entera.
+2.  **Patrón Repositorio**: Ahora guardo los datos en `LocalStorage` por simplicidad, pero encapsulé esa lógica en `RepositorioAsistente`. ¿La ventaja? Si queremos conectar una API real, solo cambio ese archivo y el resto de la app sigue funcionando igual.
+3.  **Componentes Sólidos**: Creé mis propios componentes base (`ui/`) encima de Tailwind. Esto evita repetir clases por todos lados y mantiene la UI consistente.
+4.  **UI/UX**:
+    - **Validaciones en tiempo real** en el formulario.
+    - **Sliders fluidos**: Les metí un debounce para que no se sientan pesados al arrastrar.
+    - **Tema Oscuro/Claro**: Porque a todos nos gusta.
+
+## ✅ Lo que implementé
+
+- **CRUD Completo**: Crear, editar, borrar y listar asistentes.
+- **Wizard**: Un formulario por pasos para que no abrume.
+- **Chat de Prueba**: Para ver cómo responde tu asistente.
+- **Responsive**: Se ve bien en móvil y escritorio.
+
+## ⏱️ Tiempo invertido
+
+Le dediqué unas **4.5 horas**, priorizando una buena arquitectura y acabado visual sobre cosas como tests automatizados (que me hubieran encantado hacer, pero el tiempo apretaba).
+
+Espero que el código sea de tu agrado y se entienda fácil. ¡Cualquier feedback me sirve!
