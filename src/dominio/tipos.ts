@@ -1,6 +1,5 @@
 /**
  * Definiciones de tipos y entidades del dominio (Business Core).
- * Todo está en español para facilitar la comprensión del equipo.
  */
 
 export type TonoAsistente = 'Formal' | 'Casual' | 'Profesional' | 'Amigable';
